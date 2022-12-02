@@ -231,11 +231,13 @@
             // 
             // cbGroupId
             // 
+            this.cbGroupId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGroupId.FormattingEnabled = true;
             this.cbGroupId.Location = new System.Drawing.Point(101, 38);
             this.cbGroupId.Name = "cbGroupId";
             this.cbGroupId.Size = new System.Drawing.Size(205, 21);
             this.cbGroupId.TabIndex = 22;
+            this.cbGroupId.SelectedIndexChanged += new System.EventHandler(this.cbGroupId_SelectedIndexChanged);
             // 
             // lbGroupId
             // 

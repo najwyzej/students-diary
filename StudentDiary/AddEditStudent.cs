@@ -42,6 +42,8 @@ namespace StudentDiary
                 if (_student == null)
                     throw new Exception("Brak użytkownika o podanym Id.");
 
+                cbGroupId.Items.AddRange(Groups.names.ToArray());
+
                 FillTextBoxes();
 
             }
@@ -58,15 +60,18 @@ namespace StudentDiary
             tbLanguage.Text = _student.Language;
             tbForeignLanguage.Text = _student.ForeignLanguage;
             rtbComments.Text = _student.Comments;
+            cbAdditionalClasses.Checked = _student.AdditionalClasses;
+            cbGroupId.SelectedIndex = 0;
+
         }
 
         private async void btnConfirm_Click(object sender, EventArgs e)
         {
             var students = _fileHelper.DeserializeFromFile();
 
-            if (cbGroupId.SelectedIndex == -1)
+            if (string.IsNullOrEmpty(cbGroupId.Text))
             {
-                MessageBox.Show("Wybierz z listy lub wpisz klasę ucznia.");
+                MessageBox.Show("Wybierz z listy klasę ucznia.");
             }
             else
             {
@@ -100,7 +105,7 @@ namespace StudentDiary
             var student = new Student
             {
                 Id = _studentId,
-                GroupId = cbGroupId.Text,
+                GroupId = cbGroupId.SelectedItem.ToString(),
                 Name = tbFirstname.Text,
                 LastName = tbLastname.Text,
                 Technology = tbTechnology.Text,
@@ -132,22 +137,13 @@ namespace StudentDiary
 
         private void AddEditStudent_Load(object sender, EventArgs e)
         {
-            _student = new Student();
-
-            var students = _fileHelper.DeserializeFromFile();            
-            
-            if (_student.GroupId == null)
-                cbGroupId.Text = string.Empty;
-            else
-                cbGroupId.Text = _student.GroupId.ToString();
-
-            var list = students.Where(y =>y.GroupId != null).Select(x => x.GroupId).ToArray();
-
-            cbGroupId.Items.AddRange(list);
-
+            //cbGroupId.Items.AddRange(Groups.names.ToArray());
             
         }
 
-
+        private void cbGroupId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var test = cbGroupId.SelectedIndex;
+        }
     }
 }

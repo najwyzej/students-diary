@@ -131,34 +131,25 @@ namespace StudentDiary
         {
             var students = _fileHelper.DeserializeFromFile();
 
-            List<Student> FilteredStudents = new List<Student>();
+            if (cbGroupFilter.SelectedIndex == 0)
+            {
+                dgvDiary.DataSource = students;
+            }
+            else
+            {
+                List<Student> FilteredStudents = students.FindAll(x => x.GroupId == cbGroupFilter.SelectedItem.ToString()).ToList();
 
-            FilteredStudents = students.Where(x => x.GroupId == cbGroupFilter.SelectedItem.ToString()).ToList();
-
-            //cbGF Items Add = list
-            //cb items add Wszyscy
-            //if select wszyscy {wyswietlaja sie wszyscy uczniowie}
-            //jesli cb.text wszyscy
-            //jesli select item from list 
+                dgvDiary.DataSource = FilteredStudents;
+               
+            }
 
 
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            _student = new Student();
-            var students = _fileHelper.DeserializeFromFile();
-
-            if (_student.GroupId == null)
-                cbGroupFilter.Text = string.Empty;
-            else
-                cbGroupFilter.Text = _student.GroupId.ToString();
-
-            var list = students.Where(y => y.GroupId != null).Select(x => x.GroupId).ToArray();
-
-            cbGroupFilter.Items.AddRange(list);
-
-            RefreshDiary();
+            cbGroupFilter.Items.Add("Wszyscy");
+            cbGroupFilter.Items.AddRange(Groups.names.ToArray());
         }
 
     }
