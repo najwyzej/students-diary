@@ -61,7 +61,7 @@ namespace StudentDiary
             tbForeignLanguage.Text = _student.ForeignLanguage;
             rtbComments.Text = _student.Comments;
             cbAdditionalClasses.Checked = _student.AdditionalClasses;
-            cbGroupId.SelectedIndex = 0;
+            cbGroupId.SelectedItem = _student.GroupId;
 
         }
 
@@ -137,13 +137,7 @@ namespace StudentDiary
 
         private void AddEditStudent_Load(object sender, EventArgs e)
         {
-            //cbGroupId.Items.AddRange(Groups.names.ToArray());
-            
-        }
-
-        private void cbGroupId_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var test = cbGroupId.SelectedIndex;
+            cbGroupId.Items.AddRange(Groups.names.ToArray());
         }
     }
 }

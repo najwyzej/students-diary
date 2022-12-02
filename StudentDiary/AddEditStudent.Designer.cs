@@ -237,7 +237,6 @@
             this.cbGroupId.Name = "cbGroupId";
             this.cbGroupId.Size = new System.Drawing.Size(205, 21);
             this.cbGroupId.TabIndex = 22;
-            this.cbGroupId.SelectedIndexChanged += new System.EventHandler(this.cbGroupId_SelectedIndexChanged);
             // 
             // lbGroupId
             // 
