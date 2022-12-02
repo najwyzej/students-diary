@@ -137,7 +137,10 @@ namespace StudentDiary
 
         private void AddEditStudent_Load(object sender, EventArgs e)
         {
-            cbGroupId.Items.AddRange(Groups.names.ToArray());
+            if (cbGroupId.Items.Count == 0)
+            {
+                cbGroupId.Items.AddRange(Groups.names.ToArray());
+            }
         }
     }
 }
